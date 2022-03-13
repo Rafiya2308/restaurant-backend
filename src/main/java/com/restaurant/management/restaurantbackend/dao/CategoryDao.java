@@ -1,5 +1,6 @@
 package com.restaurant.management.restaurantbackend.dao;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.restaurant.management.restaurantbackend.model.Category;
@@ -14,8 +15,10 @@ public interface CategoryDao extends JpaRepository<Category, Long> {
 	@Query("SELECT category FROM Category category")
 	List<Category> getAllCategories();
 
-	@Query(value ="INSERT INTO category_info (category_name,category_description) VALUES(:categoryName,:categoryDescription)",nativeQuery = true)
-	int saveCategory(@Param("categoryName") String categoryName,@Param("categoryDescription") String categoryDescription);
+	@Query(value ="INSERT INTO category_info (category_name,category_description,created_by,creation_date,modified_by,modification_date) VALUES(:categoryName,:categoryDescription,:createdBy,:creationDate,:modifiedBy,:modificationDate)",nativeQuery = true)
+	int saveCategory(@Param("categoryName") String categoryName,@Param("categoryDescription") String categoryDescription,
+					 @Param("createdBy") String createdBy,@Param("creationDate") LocalDateTime creationDate,
+					 @Param("modifiedBy") String modifiedBy,@Param("modificationDate") LocalDateTime modificationDate);
 
 	@Query(value = "UPDATE category_info SET category_name=:categoryName AND category_description=:categoryDescription where id =:id",nativeQuery = true)
 	boolean updateCategory(@Param("categoryName") String categoryName,@Param("categoryDescription") String categoryDescription,@Param("id") long id);

@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
@@ -36,12 +37,14 @@ public class Category implements Serializable {
 	private String createdBy;
 	
 	@Column(name="creation_date")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime creationDate;
 	
 	@Column(name="modified_by")
 	private String modifiedBy;
 	
 	@Column(name="modification_date")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime modificationDate;
 	
 	
